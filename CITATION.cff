@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "Please cite the paper and this replay supplement."
+title: "Replay supplement for Strong-coupling suppression of electronic pair order in the Holstein model, uniformly in phonon frequency and without a hopping cutoff"
+type: software
+version: 1.0.0
+license: Apache-2.0
+authors:
+  - family-names: Rens
+    given-names: Davis
+    affiliation: SuperMatics Inc.
+    orcid: "https://orcid.org/0000-0001-5839-5197"
+doi: "10.5281/zenodo.24380140"
+repository-code: "https://github.com/SuperMatics-Inc/holstein-strong-coupling-pair-bound"
+preferred-citation:
+  type: article
+  title: "Strong-coupling suppression of electronic pair order in the Holstein model, uniformly in phonon frequency and without a hopping cutoff"
+  authors:
+    - family-names: Rens
+      given-names: Davis
+      affiliation: SuperMatics Inc.
+      orcid: "https://orcid.org/0000-0001-5839-5197"
+  doi: "10.5281/zenodo.24380128"
+  year: 2026

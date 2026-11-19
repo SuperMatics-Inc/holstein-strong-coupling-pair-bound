@@ -1,0 +1,8 @@
+{
+  "stage7r_replay": {
+    "source": "../../LINEAR5/STAGE7R/replay.py",
+    "copy": "replay.py",
+    "sha256": "95cea47ff327c5abbfa1b4251bddb9eae7e8bc7c041d312ba7aeae51620027ed"
+  },
+  "imported_predecessor_replays": []
+}

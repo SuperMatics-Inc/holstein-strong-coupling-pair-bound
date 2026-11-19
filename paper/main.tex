@@ -1,0 +1,403 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[hidelinks,pdfusetitle]{hyperref}
+\usepackage{microtype}
+\newcommand{\DOI}[1]{\mbox{\href{https://doi.org/#1}{\nolinkurl{#1}}}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\supp}{supp}
+\newcommand*{\LINEARFOURDOI}{10.5281/zenodo.24380128}
+\newcommand*{\LINEARFOURSUPPDOI}{10.5281/zenodo.24380140}
+\newcommand*{\LINEARFOURREPO}{https://github.com/SuperMatics-Inc/holstein-strong-coupling-pair-bound}
+\newcommand{\ifstaged}[3]{\ifx#1\empty #3\else #2\fi}
+\newcommand{\Deltaop}{\Delta}
+\newcommand{\Nodd}{N_{\mathrm{odd}}}
+\newcommand{\Trph}{\Tr_{\mathrm{ph},0}}
+\title{Strong-coupling suppression of electronic pair order in the Holstein model, uniformly in phonon frequency and without a hopping cutoff}
+\author{Davis Rens\\SuperMatics Inc.\\\href{https://orcid.org/0000-0001-5839-5197}{ORCID 0000-0001-5839-5197}}
+\date{}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For the original spinful square-lattice Holstein model, we prove exponential decay of equal-time on-site electronic pair correlations at strong coupling, uniformly over every positive phonon frequency. With $U=F^2/K$, the only hypothesis is $\beta t^2/U\le 2^{-27}$; no separate restriction on $t/U$ is imposed. At distinct sites the bound is
+\[
+ \bigl|\langle\Deltaop_x^\dagger\Deltaop_y\rangle\bigr|
+ \le \frac{240}{59}\left(\frac{5}{64}\right)^{d(x,y)},
+ \qquad \Deltaop_x=c_{x\downarrow}c_{x\uparrow},
+\]
+so pair order requires $k_BT\le 2^{27}t^2/U$. The argument keeps the full oscillator history in each connected spatial support. After the atomic attraction is extracted, the exact normalized phonon factor is a contraction, independent of the phonon frequency. The hopping majorant is then controlled edge by edge by an exact sum-of-squares estimate on the sixteen-state bond Fock space, valid in every particle-number sector and for arbitrarily large hopping. This makes a signless finite-dimensional electronic trace available for every all-order support, and a hard-core polymer expansion controls its deletion ratio. The result also transfers to thermodynamic canonical limits at interior density and to balanced separately fixed spin sectors. The estimates are deliberately conservative and do not assert a finite-volume canonical bound, an SSH result, or an experimental transition temperature.
+\end{abstract}
+
+\section{Model and theorem}
+
+We work on a periodic square torus $\Lambda$ of side at least four, with graph distance $d_\Lambda$. At each site there are two fermion modes $c_{x\sigma}$, $\sigma\in\{\uparrow,\downarrow\}$, and one oscillator with coordinate $X_x$, momentum $P_x$, mass $m$, and spring constant $K$. In units where the fermionic hopping amplitude is $t\ge0$, the grand-canonical Hamiltonian is
+\begin{equation}\label{eq:hamiltonian}
+ H_\Lambda=-t\sum_{\{x,y\}\in E_\Lambda}\sum_\sigma
+ (c_{x\sigma}^\dagger c_{y\sigma}+c_{y\sigma}^\dagger c_{x\sigma})
+ +\sum_{x\in\Lambda}\left(\frac{P_x^2}{2m}+\frac{KX_x^2}{2}
+ +F X_x(n_x-1)\right)-\mu N,
+\end{equation}
+where $n_x=\sum_\sigma c_{x\sigma}^\dagger c_{x\sigma}$ and $N=\sum_x n_x$. The oscillator zero point is immaterial. We set
+\[
+ U=\frac{F^2}{K}>0,\qquad \Omega=\hbar\sqrt{K/m}>0,\qquad
+ \beta=(k_B T)^{-1},\qquad \Deltaop_x=c_{x\downarrow}c_{x\uparrow}.
+\]
+There is no direct electron-electron interaction. These conventions follow the released square-lattice Holstein paper, with the pair field ordered as there \cite{linear4,slow,cylinders}. The thermodynamic statements below concern limits of periodic tori.
+
+\begin{theorem}[Uniform-frequency pair clustering]\label{thm:main}
+Suppose
+\begin{equation}\label{eq:hypotheses}
+ \frac{\beta t^2}{U}\le 2^{-27}.
+\end{equation}
+For every $\Omega>0$, every real common chemical potential $\mu$, every such torus, and all distinct $x,y\in\Lambda$,
+\begin{equation}\label{eq:mainbound}
+ \left|\frac{\Tr(\Deltaop_x^\dagger\Deltaop_y e^{-\beta H_\Lambda})}
+ {\Tr(e^{-\beta H_\Lambda})}\right|
+ \le A q^{d_\Lambda(x,y)},\qquad
+ q=\frac{5}{64},\quad A=\frac{240}{59}.
+\end{equation}
+The constants do not depend on $\Omega$, the volume, or $\mu$. No condition on the ratio $t/U$ is imposed; \eqref{eq:hypotheses} is the only hypothesis. In particular, the estimate is uniform as $\Omega\downarrow0$ through positive values. It applies to the original electron-phonon Hamiltonian, not to a projected or effective electronic model.
+\end{theorem}
+
+\begin{corollary}[Pairing temperature scale]\label{cor:temperature}
+For pair order defined by thermodynamic nonexponential correlations of the on-site electronic fields $\Deltaop_x$, the theorem implies
+\[
+ k_B T_{\rm pair}\le 2^{27}\frac{t^2}{U}.
+\]
+\end{corollary}
+
+\begin{corollary}[Canonical thermodynamic limits]\label{cor:canonical}
+Under the same hypothesis \eqref{eq:hypotheses}, at every interior total density $n\in(0,2)$ the bound of Theorem~\ref{thm:main} holds for each translation-invariant thermodynamic limit of periodic canonical states with $N/|\Lambda|\to n$. It also holds for balanced separately fixed spin sectors with $N_\uparrow/|\Lambda|$ and $N_\downarrow/|\Lambda|$ tending to the same value in $(0,1)$. These are thermodynamic-limit statements. No uniform finite-volume canonical estimate is asserted.
+\end{corollary}
+
+\section{Context and scope}
+The Holstein model is the standard local electron-phonon model introduced in the study of polaron motion \cite{holstein}. The displacement used below is the Lang-Firsov transformation \cite{langfirsov}. Our proof concerns correlations of the original electron operators after undoing that unitary; it is not a statement about a projected pair model.
+
+Ueltschi's Theorem 3.1 proves uniqueness and exponential clustering for the repulsive spinful Hubbard model in its low-temperature domain D2, which includes the regime of small $\beta t^2/\Delta$ and small $t/\Delta$, where $\Delta=\min\{\mu,U-\mu\}$ and $0<\mu<U$. The same theorem also has a high-temperature domain D1 \cite{uelschiHubbard}. On a bipartite lattice at particle-hole-symmetric half filling, a partial particle-hole transformation on one spin maps the attractive Hubbard model to the half-filled repulsive model and maps the on-site pair field to staggered transverse spin. Thus pair clustering at the $t^2/U$ scale is already known for the attractive Hubbard model at half filling. The high-frequency Holstein limit is the attractive Hubbard model, but at finite phonon frequency the oscillator remains part of the problem. Our estimate treats the original unbounded oscillator space, is uniform in $\Omega$ down to $\Omega\downarrow0$, and needs no restriction on real $\mu$; by contrast, the quoted Hubbard domain requires $0<\mu<U$ and becomes increasingly restrictive as $\mu$ approaches its endpoints. General quantum-lattice Gibbs-state and correlation-cluster methods give useful mathematical context \cite{fruhlich,uelschiCorrelations}. Quantum Pirogov-Sinai theory establishes low-temperature phase diagrams for quantum perturbations of classical spin systems, including fermionic systems, rather than this pair-correlation theorem \cite{dff,bku,bkfermion}. For electron-phonon models, the checked arXiv preprint by Macris and Piguet proves charge-density-wave and phonon order for a modified spinless Holstein model with a curved optical branch. Its equivalence to the published journal version cited here has not been independently verified, and it concerns a different order parameter \cite{macris}. Freericks derives a fourth-order effective pseudospin description and mean-field transition estimates for attractive Holstein and Hubbard models, under a phonon-ground-state regime that requires $T_c\ll\Omega$ \cite{freericks}. The abstract-polymer criterion used here is due to Koteck\'y and Preiss \cite{kp}.
+
+The distinction within the works examined is an inference, not a global priority claim: an exponential bound on the electronic pair correlation for the original spinful Holstein model, with constants uniform in $\Omega$. The comparison used full texts of the Hubbard, intermediate-temperature, and strong-coupling papers cited above, and the Macris--Piguet arXiv preprint. Equivalence of that preprint to the published journal version was not independently checked. The remaining related polymer and correlation literature was assessed from metadata and abstracts.
+
+\section{Lang-Firsov representation and the oscillator contraction}
+
+Let $a_x$ be the oscillator annihilation operator and $\alpha^2=U/(2\Omega)$. Applying the on-site Lang-Firsov unitary to \eqref{eq:hamiltonian}, and omitting the oscillator zero-point constant, gives an atomic part
+\begin{equation}\label{eq:atomic}
+ H_0=\sum_x\left[\Omega a_x^\dagger a_x-\frac U2(n_x-1)^2-\mu n_x\right].
+\end{equation}
+Each directed spin hop becomes a fermionic partial isometry multiplied by endpoint displacement operators. The full transformed hopping on one bond has norm at most $2t$ and is fermion-even. The on-site pair operator is also conjugated by a unitary displacement, of norm one.
+
+We give the chronological oscillator identity because the order of the displacements matters. For one oscillator define the analytically continued thermal-time displacement
+\[
+ D(c\alpha,u)=\exp\!\left(c\alpha e^{\Omega u}a^\dagger-c\alpha e^{-\Omega u}a\right).
+\]
+Let $0\le u_1<\cdots<u_m<\beta$, $c_j\in\mathbb Z$, and $\sum_jc_j=0$. With $\mathcal T$ denoting increasing imaginary-time order, so that the latest factor is leftmost,
+\begin{align}
+ \Trph\!\left(\mathcal T\prod_{j=1}^mD(c_j\alpha,u_j)\right)
+ &=\exp[-\Phi_\beta[n]],\label{eq:chronological}\\
+ \Phi_\beta[n]&=\frac14\int_0^\beta\!du\int_0^\beta\!dv\,
+       (n(u)-n(v))^2K_\beta(u-v),\label{eq:phi}\\
+ K_\beta(w)&=\frac{U\Omega}{2}
+ \frac{e^{-\Omega w}+e^{-\Omega(\beta-w)}}{1-e^{-\beta\Omega}},
+ \quad 0\le w\le\beta.\label{eq:kernel}
+\end{align}
+Here $\Trph$ is normalized by the free oscillator partition function, $n(u)$ is any periodic piecewise-constant occupation path with jumps $c_j$ at $u_j$, and the kernel is periodically extended. In particular,
+\begin{equation}\label{eq:kernelmass}
+ K_\beta(w)>0,\qquad \int_0^\beta K_\beta(w)\,dw=U,
+ \qquad \Phi_\beta[n]\ge0.
+\end{equation}
+Thus the complete phonon factor is in $(0,1]$.
+
+For completeness, the chronological calculation follows directly from scalar Baker-Campbell-Hausdorff and thermal normal ordering. They give
+\begin{align}\label{eq:bch}
+ \log\Trph\!\left(\mathcal T\prod_jD(c_j\alpha,u_j)\right)
+ ={}&-\frac{\alpha^2}{2}\coth(\beta\Omega/2)\left(\sum_jc_j\right)^2\\
+ &-\alpha^2\sum_{i<j}c_ic_j
+ \frac{\cosh(\beta\Omega/2-\Omega(u_j-u_i))-\cosh(\beta\Omega/2)}
+      {\sinh(\beta\Omega/2)}.\nonumber
+\end{align}
+Substituting the neutral jumps of the periodic path into this expression, or integrating the piecewise-constant path by parts between successive jumps, yields \eqref{eq:phi}. Equivalently, for Fourier coefficients $n_s=\beta^{-1}\int_0^\beta n(u)e^{-2\pi isu/\beta}\,du$, the kernel has multiplier $U\Omega^2/(\Omega^2+(2\pi s/\beta)^2)$ and
+\[
+ \Phi_\beta[n]=\frac{\beta U}{2}\sum_{s\in\mathbb Z}|n_s|^2
+ \frac{(2\pi s/\beta)^2}{\Omega^2+(2\pi s/\beta)^2}.
+\]
+This also proves nonnegativity and makes explicit that the zero Fourier mode contributes nothing.
+
+The raw Gaussian weight obtained by integrating out the oscillator is not a contraction. For $q(u)=n(u)-1$ it is
+\[
+ \exp\!\left(\frac12\int_0^\beta\!du\int_0^\beta\!dv\,
+       q(u)K_\beta(u-v)q(v)\right),
+\]
+which can exceed one.
+
+The Lang-Firsov atomic term in \eqref{eq:atomic} already supplies the attraction weight
+\[
+ \exp\!\left\{\frac U2\int_0^\beta q(u)^2\,du\right\}.
+\]
+Dividing the raw retarded factor by this weight leaves exactly $e^{-\Phi_\beta[q]}$, by the mass identity in \eqref{eq:kernelmass}. The contraction belongs to this residual, not to the raw Gaussian weight.
+
+The estimate is uniform in frequency. The kernel $K_\beta$ is positive and has mass $U$ for each $\Omega>0$. Although $\alpha$ may diverge as $\Omega\downarrow0$, it does not enter the residual bound. At fixed $\beta$, $K_\beta(w)\to U/\beta$ as $\Omega\downarrow0$. We make no assertion at $\Omega=0$ itself.
+
+A closed Fock trajectory has neutral jumps at each site. Physical pair insertions at time zero are included among those jumps. Since the displacement trace factorizes over sites, all oscillator cross-actions and all shared-site occupation histories remain inside the connected spatial support on which they occur. No factorization in time is used.
+
+\section{A finite electronic majorant for every support}
+
+For a nonempty physical edge set $E$, let $S_E$ be its endpoint set, $v=|S_E|$, and $k=|E|$. On the electronic occupation basis, with local states empty, up, down, and double, form a real symmetric nonnegative matrix $B_E$ by replacing each legal directed spin hop on an edge by the matrix entry $1$ and removing its CAR sign. Different legal hops have different destinations, so $B_E=\sum_{e\in E}B_e$, where $B_e$ is the matrix built in the same way from the single edge $e$ and acting as the identity on all other sites. The matrix is a bookkeeping majorant, not a physical Hamiltonian. Write
+\[
+ N_{\rm odd}=\sum_{x\in S_E}{\bf1}_{\{n_x=1\}},\qquad
+ N=\sum_{x\in S_E}n_x,\qquad z=e^{\beta\mu},\qquad
+ z_a=1+z^2+2ze^{-\beta U/2}.
+\]
+After shifting each site's energy by $U/2$, the atomic electronic partition function per site is $z_a$. For $\ell\ge1$ put
+\begin{equation}\label{eq:PE}
+ P_E(\ell)=\frac{\Tr_{\rm el}\exp[-\beta(D_0-\ell tB_E)]}{z_a^v},
+ \qquad D_0=\frac U2N_{\rm odd}-\mu N.
+\end{equation}
+Its Dyson coefficients are nonnegative. If $w(E)$ denotes the signed physical activity formed by all chronological trajectories using every edge label in $E$, then
+\begin{equation}\label{eq:activitymajor}
+ |w(E)|\le \sum_{\text{such trajectories}}|\text{weight}|
+ \le \ell^{-k}P_E(\ell).
+\end{equation}
+Indeed a trajectory using all $k$ distinct labels has at least $k$ hopping insertions. Scaling every hop by $\ell$ multiplies its positive majorant by $\ell^m\ge\ell^k$, and dropping the covering restriction only increases the sum. The residual phonon factor is at most one by \eqref{eq:chronological}. For a marked pair activity $w_{xy}(E)$, strip the CAR signs from $\Deltaop_x^\dagger\Deltaop_y$ to obtain a nonnegative partial isometry $O_{xy}$ of norm one. Its jumps remain in \eqref{eq:phi}. For a positive matrix $Q$, $|\Tr(O_{xy}Q)|\le\Tr Q$, as is seen by diagonalizing $Q$ and bounding each diagonal matrix element of the contraction by one. Thus \eqref{eq:activitymajor} also holds for the marked activity.
+
+The estimate that compares the hopping with the interaction is local to a single edge. It is exact in the sense that it is a sum of squares on a sixteen-dimensional space, so nothing is discarded before the square is completed and no relation between the hopping and $U$ is needed. For an edge $e=\{u,v\}$ put $N_{{\rm odd},e}=\mathbf 1_{\{n_u=1\}}+\mathbf 1_{\{n_v=1\}}$. Both $B_e$ and $N_{{\rm odd},e}$ act on the Fock space of the two sites $u,v$, which has dimension sixteen, and as the identity elsewhere.
+
+\begin{lemma}[Edge-local form estimate]\label{lem:form}
+For every $g\ge0$ and $\alpha>0$,
+\begin{equation}\label{eq:edgeform}
+ gB_e\le\alpha N_{{\rm odd},e}+\frac{2g^2}{\alpha}I
+\end{equation}
+as quadratic forms on the bond Fock space, in every particle-number sector. Consequently, on any finite physical subgraph $E$ with $k$ edges and maximum degree at most $D$, for every $g\ge0$,
+\begin{equation}\label{eq:form}
+ gB_E\le\frac U4N_{\rm odd}+\frac{8Dkg^2}{U}I
+\end{equation}
+as quadratic forms. The chemical potential is arbitrary because hopping preserves $N$.
+\end{lemma}
+\begin{proof}
+Both sides of \eqref{eq:edgeform} commute with the bond particle number $N_e$, so we check $R_e=\alpha N_{{\rm odd},e}+(2g^2/\alpha)I-gB_e\ge0$ sector by sector. Order the modes as $(u\uparrow,u\downarrow,v\uparrow,v\downarrow)$ and label occupation vectors $|n_{u\uparrow},n_{u\downarrow},n_{v\uparrow},n_{v\downarrow}\rangle$.
+
+For $N_e=0$ and $N_e=4$ there is one state each, with $B_e=0$ and $N_{{\rm odd},e}=0$, so $R_e=(2g^2/\alpha)I\ge0$.
+
+For $N_e=1$ and $N_e=3$ each sector has dimension four and every state has exactly one singly occupied site, so $N_{{\rm odd},e}=I$. The only hop moves the single particle, or the single hole, to the other site with the same spin, so $B_e$ is a symmetric permutation matrix and $B_e^2=I$. Therefore
+\[
+ R_e=\Bigl(\sqrt\alpha\,I-\frac{g}{2\sqrt\alpha}B_e\Bigr)^2+\frac{7g^2}{4\alpha}I\ge0.
+\]
+
+For $N_e=2$ the sector has dimension six. Let $e_1=|1,1,0,0\rangle$ and $e_2=|0,0,1,1\rangle$, which have one doubly occupied site and $N_{{\rm odd},e}=0$. Let $o_1=|1,0,0,1\rangle$ and $o_2=|0,1,1,0\rangle$, which have two singly occupied sites of opposite spin and $N_{{\rm odd},e}=2$. Let $p_\uparrow=|1,0,1,0\rangle$ and $p_\downarrow=|0,1,0,1\rangle$, which have parallel spins and $N_{{\rm odd},e}=2$. Hopping conserves spin, so $B_ep_\sigma=0$. Each of $e_1,e_2$ is carried to $o_1+o_2$ and each of $o_1,o_2$ to $e_1+e_2$. With $e_\pm=(e_1\pm e_2)/\sqrt2$ and $o_\pm=(o_1\pm o_2)/\sqrt2$ this reads
+\[
+ B_ee_+=2o_+,\qquad B_eo_+=2e_+,\qquad B_ee_-=B_eo_-=0.
+\]
+For $\psi=c_+e_++c_-e_-+d_+o_++d_-o_-+f_\uparrow p_\uparrow+f_\downarrow p_\downarrow$,
+\begin{align*}
+ \langle\psi,R_e\psi\rangle
+ &=2\alpha\bigl(|d_+|^2+|d_-|^2+|f_\uparrow|^2+|f_\downarrow|^2\bigr)
+ +\frac{2g^2}{\alpha}\|\psi\|^2-4g\,\mathrm{Re}(\bar c_+d_+)\\
+ &=\Bigl|\sqrt{2\alpha}\,d_+-\frac{\sqrt2\,g}{\sqrt\alpha}\,c_+\Bigr|^2
+ +2\alpha\bigl(|d_-|^2+|f_\uparrow|^2+|f_\downarrow|^2\bigr)\\
+ &\qquad+\frac{2g^2}{\alpha}\bigl(|c_-|^2+|d_+|^2+|d_-|^2+|f_\uparrow|^2+|f_\downarrow|^2\bigr)\ \ge0.
+\end{align*}
+This proves \eqref{eq:edgeform}. For \eqref{eq:form}, sum \eqref{eq:edgeform} over $e\in E$. Since $\sum_{e\in E}N_{{\rm odd},e}=\sum_x\deg_E(x)\mathbf 1_{\{n_x=1\}}\le D\,N_{\rm odd}$, taking $\alpha=U/(4D)$ gives $\alpha D N_{\rm odd}=\tfrac U4N_{\rm odd}$ and $k\cdot2g^2/\alpha=8Dkg^2/U$.
+\end{proof}
+
+By \eqref{eq:form} with $g=\ell t$,
+\[
+ D_0-\ell tB_E\ge \frac U4N_{\rm odd}-\mu N-\frac{8Dk\ell^2t^2}{U}I.
+\]
+Min-max eigenvalue monotonicity for Hermitian matrices, followed by applying the decreasing scalar function $e^{-\beta x}$ to the ordered eigenvalues, gives trace monotonicity. No operator-monotonicity assertion for the matrix exponential is needed. With
+\[
+ z_b=1+z^2+2ze^{-\beta U/4},
+\]
+we obtain
+\begin{equation}\label{eq:tracebound}
+ P_E(\ell)\le \exp\!\left(\frac{8Dk\beta\ell^2t^2}{U}\right)
+ \left(\frac{z_b}{z_a}\right)^v.
+\end{equation}
+
+The ratio $z_b/z_a$ is bounded uniformly in the fugacity, with a constant that completes a square.
+\begin{lemma}[Square-completion cap]\label{lem:cap}
+For all real $\mu$ and all $\beta,U>0$,
+\begin{equation}\label{eq:fugacity}
+ 1<\frac{z_b}{z_a}<\frac54.
+\end{equation}
+\end{lemma}
+\begin{proof}
+Put $w=e^{-\beta U/4}\in(0,1)$, so that $z_a=1+2zw^2+z^2$ and $z_b=1+2zw+z^2$. Then $z_b-z_a=2zw(1-w)>0$, and
+\[
+ 5z_a-4z_b=1-8zw+10zw^2+z^2=(1-z)^2+2z(2w-1)^2+2zw^2>0.
+\]
+\end{proof}
+
+Now take $D=4$ and $L=2^{10}=1024$, and put
+\[
+ \delta=\frac{32L^2\beta t^2}{U}.
+\]
+Hypothesis \eqref{eq:hypotheses} gives $\delta\le2^{25}\cdot2^{-27}=1/4$, and for $D=4$ the exponent in \eqref{eq:tracebound} at $\ell=L$ is $8Dk\beta L^2t^2/U=\delta k\le k/4$. For every connected physical support, $v\le k+1$. Because $e<3$ and $(4/3)^4=256/81>3$, we have $e^{1/4}<4/3$. Equations \eqref{eq:tracebound} and \eqref{eq:fugacity} then give
+\[
+ P_E(L)\le\left(\frac54\right)^{k+1}e^{k/4}\le\frac54\left(\frac53\right)^k,
+\]
+and by \eqref{eq:activitymajor} with $\ell=L$,
+\begin{equation}\label{eq:activity}
+ |w(E)|,\ |w_{xy}(E)|\le\frac54\left(\frac{5}{3L}\right)^k.
+\end{equation}
+This controls complete supports at all orders. It contains no short-time restriction, no discarded initial spinons, no restriction to phonon vacuum, no resonance denominator, and no assumption that $\beta t$ is small. It also contains no restriction on $t/U$, because \eqref{eq:form} holds for every $g\ge0$.
+
+An earlier form of this argument split $B_E$ into pair-creation, pair-annihilation and propagation parts; the first two obeyed an estimate like \eqref{eq:form} for every $g>0$, but the propagation part satisfied only the linear bound $gB_0\le8g\Nodd$ on the square lattice, whose absorption demanded $g/U\le1/64$ and hence, at $g=2^{15}t$, the cutoff $t/U\le2^{-21}$ (with $\beta t^2/U\le2^{-38}$, the amplitude $18432/2021$, and the fugacity cap $e$ in place of the present $5/4$).
+
+\section{Spatial polymers and the deletion estimate}
+
+Group the Dyson series by the distinct physical bond labels it uses. Each connected component has connected edge support and becomes a polymer $\gamma$ with vertex support $S_\gamma$. Two polymers are compatible exactly when their vertex supports are disjoint. Components on disjoint supports have independent atomic traces and oscillators; their operators are fermion-even and commute. Summing over the chronological shuffles of disconnected components therefore gives the exact hard-core gas
+\[
+ Z_\Lambda=\sum_{\mathcal F\text{ compatible}}\prod_{\gamma\in\mathcal F}w(\gamma),
+\]
+where the empty family contributes one. The physical activities can be signed. The factorization is spatial only: all time correlations within each polymer are retained.
+
+We state and prove the deletion form of the Koteck\'y-Preiss argument needed below \cite{kp}.
+\begin{lemma}[Polymer convergence and support deletion]\label{lem:KP}
+Let a finite hard-core polymer gas have finite supports $S_\gamma$ and possibly complex activities. If
+\begin{equation}\label{eq:sitecriterion}
+ \sup_x\sum_{\gamma:x\in S_\gamma}|w(\gamma)|e^{|S_\gamma|}\le1,
+\end{equation}
+then its logarithmic cluster expansion converges absolutely, its partition function is nonzero, and for every set of vertices $S$,
+\begin{equation}\label{eq:deletion}
+ \left|\frac{Z_{\Lambda\setminus S}}{Z_\Lambda}\right|\le e^{|S|}.
+\end{equation}
+\end{lemma}
+\begin{proof}
+For a tuple $\boldsymbol\gamma=(\gamma_1,\ldots,\gamma_n)$, the logarithm is the sum over connected graphs on $\{1,\ldots,n\}$ of the product of pair factors $-1$ for incompatible pairs and $0$ for compatible pairs, multiplied by $\prod_iw(\gamma_i)/n!$. For the hard-core edge factors, order the possible incompatibility edges and partition connected graphs by their minimum spanning tree. For each fixed tree, the graphs in its class form an interval between that tree and the tree with all admissible larger chords. The alternating sum over optional chords is zero or has magnitude one. Thus the connected-graph coefficient is bounded by the sum over spanning trees.
+
+Root these trees at $\gamma$. The absolute sum of rooted descendants is bounded inductively by
+\[
+ F(\gamma)=|w(\gamma)|\exp\!\left(\sum_{\gamma'\not\sim\gamma}F(\gamma')\right).
+\]
+Every incompatible $\gamma'$ intersects some vertex in $S_\gamma$, so the site criterion gives $\sum_{\gamma'\not\sim\gamma}F(\gamma')\le |S_\gamma|$ when $F(\gamma')\le|w(\gamma')|e^{|S_{\gamma'}|}$. Hence $F(\gamma)\le|w(\gamma)|e^{|S_\gamma|}$ and the rooted tree sum converges. The same bound controls the total absolute logarithmic cluster weight of clusters touching a specified set $S$ by $|S|$. Clusters not touching $S$ are exactly the logarithmic expansion for $Z_{\Lambda\setminus S}$. Their difference is therefore a convergent logarithmic sum of magnitude at most $|S|$, proving \eqref{eq:deletion} after exponentiation. Scaling all activities continuously from zero to their given values shows the exponential of the convergent logarithm equals the partition function and is nonzero.
+\end{proof}
+
+On a graph of maximum degree $D_g$, the number of connected distinct-edge supports of size $k$ rooted at a given vertex is at most $D_g^{2k}$. To see this, double every edge of a connected support, traverse an Euler circuit from the root, and encode each step by one of at most $D_g$ choices; choosing a canonical traversal gives an injection into walks of length $2k$. For the square lattice, $D_g=4$. From \eqref{eq:activity}, $v\le k+1$, and $e<3$,
+\begin{align}
+ \sup_x\sum_{E:x\in S_E}|w(E)|e^{|S_E|}
+ &\le\sum_{k\ge1}16^k\cdot\frac54\left(\frac{5}{3L}\right)^k3^{k+1}
+ =\frac{15}{4}\sum_{k\ge1}q^k=\frac{15}{4}\,\frac{q}{1-q}=\frac{75}{236}<1,
+ \label{eq:budget}
+\end{align}
+where $q=16\cdot3\cdot5/(3L)=80/L=5/64$. The marked activities obey the same estimate.
+
+For distinct $x,y$, a connected marked component containing only one of the pair insertions has zero electronic trace by charge conservation on its support. Consequently one marked polymer must connect $x$ to $y$, and it uses at least $d_\Lambda(x,y)$ physical edges. All unmarked polymers outside its support contribute the exact deletion ratio, bounded by \eqref{eq:deletion}; no signless partition function is used as a substitute denominator. Thus
+\begin{align*}
+ |\langle\Deltaop_x^\dagger\Deltaop_y\rangle|
+ &\le \sum_{E\text{ connected}:x,y\in S_E}|w_{xy}(E)|e^{|S_E|}\\
+ &\le \frac{15}{4}\sum_{k\ge d_\Lambda(x,y)}q^k
+ =\frac{15}{4(1-q)}q^{d_\Lambda(x,y)}
+ =\frac{240}{59}\left(\frac{5}{64}\right)^{d_\Lambda(x,y)}.
+\end{align*}
+This proves Theorem~\ref{thm:main}. At fixed positive distance the constants are uniform in volume and chemical potential. The on-site diagonal pair expectation is at most one, and the off-site row sum is uniformly finite since each distance shell on the square lattice has at most $4d$ sites.
+
+\section{Canonical transfer by a real pair source}
+
+A canonical conclusion does not follow by simply dividing a finite-volume canonical numerator by a grand-canonical partition function. We instead use a number-conserving source and a thermodynamic pressure argument. Fix a nonzero displacement $r$ and phase $\theta$, and define
+\begin{equation}\label{eq:source}
+ X=\sum_{x\in\Lambda}\left(e^{i\theta}\Deltaop_x^\dagger\Deltaop_{x+r}
+ +e^{-i\theta}\Deltaop_{x+r}^\dagger\Deltaop_x\right),\qquad
+ H(\xi)=H-\xi X.
+\end{equation}
+Each source label has two-site support and norm at most two. Count labels separately even when their endpoints coincide with those of another label. The resulting support multigraph has degree at most six, including the four physical hopping labels at each vertex. Pair sources preserve both spin numbers and local occupation parity. A pair source moves both electrons of one of its two sites to the other, so it joins configurations of those two sites in which neither site is singly occupied, and the form estimate of Lemma~\ref{lem:form} is not applied to it. That estimate is used for the physical labels only, and source labels enter through their norm alone. At scale $L$ a source label costs at most $2\beta L|\xi|$ in the exponent of the support trace. For
+\[
+ |\xi|\le\xi_0:=\frac{1}{16\beta L},
+\]
+this is at most $1/8$, while a physical label costs at most $\delta\le1/4$ as above. With $k_{\rm p}$ physical and $k_{\rm s}$ source labels and $k=k_{\rm p}+k_{\rm s}$, the total exponent is at most $k_{\rm p}/4+k_{\rm s}/8\le k/4$, and $e^{k/4}<(4/3)^k$. The atomic ratio is at most $(5/4)^{|S_E|}\le(5/4)^{k+1}$. Hence \eqref{eq:activity} continues to hold with $k$ the total number of physical and source labels, and the only change in the budget is that the rooted count becomes $6^{2k}=36^k$. The site budget is
+\[
+ q_{\rm src}=\frac{36\cdot3\cdot5}{3L}=\frac{180}{L}=\frac{45}{256},\qquad
+ \frac{15}{4}\,\frac{q_{\rm src}}{1-q_{\rm src}}=\frac{675}{844}<1.
+\]
+Thus the complex source pressure $p_\Lambda(\xi)=|\Lambda|^{-1}\log Z_{\rm GC}(\xi;\mu)$ is analytic in this disk, uniformly in volume and real $\mu$. Its absolute cluster budget is at most one, so $|p_\Lambda(\xi)-p_\Lambda(0)|\le2$. Cauchy's estimate bounds the terms of degree at least two by $4|\xi|^2/\xi_0^2$ for $|\xi|\le\xi_0/2$. At zero source, translation invariance gives
+\[
+ p_\Lambda'(0)=2\beta\,\operatorname{Re}\left(e^{i\theta}
+ \langle\Deltaop_0^\dagger\Deltaop_r\rangle_{\rm GC}\right).
+\]
+Using Theorem~\ref{thm:main} for the linear term yields
+\begin{equation}\label{eq:sourcebound}
+ p_\Lambda(\xi)-p_\Lambda(0)
+ \le 2\beta A q^{d(0,r)}|\xi|+4|\xi|^2/\xi_0^2
+ \quad (\xi\in\mathbb R,\ |\xi|\le\xi_0/2).
+\end{equation}
+
+We include the ensemble argument. Tile a large torus by fixed open square blocks and first remove all interactions crossing block boundaries. For fixed $\xi$, the removed hopping and source operators are bounded; the change in log trace is at most $\beta$ times their summed norms, hence is proportional to the boundary. Each block has a finite electronic sector space and a finite normalized oscillator trace. The disconnected canonical partition is a sum over block number allocations. For fixed block volume $b$, the number of total-number allocations is at most $(2b+1)^M$ for $M$ blocks, so its logarithm differs from the largest allocation term by at most $M\log(2b+1)$. Dividing by total volume, both this allocation entropy and the boundary cost vanish as block size tends to infinity. At fixed block size, the largest allocation is described by the concave envelope of the finitely many block-sector log partitions; rounding the block fractions handles arbitrary density sequences, and comparison of block sizes gives a common thermodynamic limit. This construction gives the concave canonical log-partition density $f(n)$ and the pressure dual
+\[
+ p(\mu)=\sup_{0\le n\le2}\{f(n)+\beta\mu n\}.
+\]
+At each interior density choose a finite supporting slope, represented by a real $\mu$. For any sequence $N/|\Lambda|\to n$ at that slope,
+\begin{equation}\label{eq:deficit}
+ \delta_\Lambda=\frac{\log Z_{\rm GC}(0;\mu)-\log Z_N(0)-\beta\mu N}
+ {|\Lambda|}\ge0,\qquad \delta_\Lambda\longrightarrow0.
+\end{equation}
+The same block argument at two conserved densities gives a finite concave density function $f(n_\uparrow,n_\downarrow)$. At a balanced interior point $(a,a)$ it has a finite supporting vector. Spin exchange sends this vector to another supporting vector, and their average is a common real chemical potential supporting $(a,a)$. This proves the same vanishing deficit along balanced separately fixed spin sectors. It does not supply a common supporting chemical potential at an imbalanced point.
+
+Since $e^{\beta\mu N}Z_N(\xi)\le Z_{\rm GC}(\xi;\mu)$ for real $\xi$, equations \eqref{eq:sourcebound}-\eqref{eq:deficit} and convexity of the finite canonical real-source log partition give, for $0<\xi\le\xi_0/2$,
+\[
+ \left|2\beta\operatorname{Re}\left(e^{i\theta}
+ \langle\Deltaop_0^\dagger\Deltaop_r\rangle_N\right)\right|
+ \le 2\beta A q^{d(0,r)}+\frac{4\xi}{\xi_0^2}+\frac{\delta_\Lambda}{\xi}.
+\]
+First take the thermodynamic limit at fixed $\xi$, then let $\xi\downarrow0$, and vary $\theta$. This proves Corollary~\ref{cor:canonical} for total-number and balanced separately fixed spin-number limits. The transfer is only after the thermodynamic limit; it is not a finite-volume canonical estimate.
+
+\section{Comparison and limitations}
+
+The strong-coupling ceiling of Theorem~\ref{thm:main} is $2^{27}t^2/U$. At $t/U=2^{-30}$ and $\Omega=U$ it equals $2^{-33}U$. As an elementary comparator, the bounded-bond expansion with bond norm at most $2t$ gives $|w(E)|\le(e^{2\beta t}-1)^{|E|}$. If $\beta t\le1/1024$, then $e^{2\beta t}-1\le1/511$, and its square-lattice site budget is at most $3(48/511)/(1-48/511)=144/463<1$. The same deletion argument therefore gives the original-model bare-hopping bound $k_BT_{\rm pair}\le1024t$. The bounded-bond activity inequality follows from trace H\"older applied to the atomic heat factors and bounded insertions, followed by the chronological simplex and multiplicity sum. This comparison does not reuse the form estimate or the quadratic-support bound. It is the elementary bare-hopping bound that the same deletion argument yields, not a known physical transition temperature. At $t/U=2^{-30}$ it equals $1024t=2^{-20}U$, which is $2^{13}=8192$ times larger than the strong-coupling ceiling. The two bounds cross where $2^{27}x^2=2^{10}x$, that is at $x=t/U=2^{-17}$. Below that value the strong-coupling ceiling is the smaller one. Above it the bare-hopping comparator is smaller, although Theorem~\ref{thm:main} remains valid there.
+
+The released adiabatic threshold $\tau_4$ is determined by
+\[
+ \tau_4^3=2^{25}U\Omega^2\left[1+\log\left(1+\frac{t}{\tau_4}\right)\right]
+\]
+for the Holstein model, with kinetic scale $E=t$ \cite{linear4}. At $\Omega=U$, substituting $\tau=U$ into its defining equation makes the right side exceed $U^3$, so its positive root is larger than $U$, and hence larger than the present $2^{-33}U$ estimate. In the dimensionless variables $x=t/U$, $y=\Omega/U$ and $\theta_4=\tau_4/U$, the combined ceiling is the smallest of the available thresholds, $\min(\theta_4,2^{27}x^2,2^{10}x)$ in units of $U$. At fixed $t,U>0$, the adiabatic threshold tends to zero as $\Omega\downarrow0$, whereas $2^{27}t^2/U$ remains positive. This theorem therefore adds no adiabatic exponent gain; the adiabatic estimate is sharper in that limit. For $0<x\le2^{-17}$, the quantity $\theta^3-2^{25}y^2[1+\log(1+x/\theta)]$ is increasing in $\theta$ and decreasing in $y$, so $2^{27}x^2\le\theta_4$ holds exactly when
+\[
+ y\ge\frac{2^{28}x^3}{\sqrt{1+\log\!\left(1+2^{-27}x^{-1}\right)}}.
+\]
+At $x=2^{-19}$, for instance, the ceiling is $2^{-11}U$, four times below the bare-hopping value $2^{-9}U$, and this frequency threshold is $2^{-29}/\sqrt{1+\log(1+2^{-8})}\approx1.859\times10^{-9}$.
+
+The ordinary operator-norm Schrieffer-Wolff obstruction can be seen on a single bond in its two-electron sector. Let $a_-=(a_x-a_y)/\sqrt2$, $X=U/\Omega$, and let $D_-(\sqrt X)$ denote displacement of this relative oscillator mode. For a paired state with $m$ relative-mode quanta and a specified broken-pair spin channel with zero quanta, define the dimensionless matrix element
+\[
+ v_m=\langle0|D_-(\sqrt X)|m\rangle,\qquad
+ |v_m|^2=e^{-X}\frac{X^m}{m!}.
+\]
+The physical hopping matrix element has magnitude $t|v_m|$. At $X=m$, the paired energy $-U+m\Omega$ equals the zero-phonon broken-pair energy, and $v_m\ne0$, so the ordinary inverse commutator is singular. For $X=m+\delta$, with $m\ge1$ and $0<\delta\le1/2$, the energy difference to a broken-pair state with $k$ relative-mode quanta is $(k+\delta)\Omega$. Concavity of $\log$ gives
+\[
+ \log(m!)\le\int_1^m\log s\,ds+\tfrac12\log m,
+ \qquad m!\le e\,m^{m+1/2}e^{-m}.
+\]
+Thus $|v_m|^2\ge e^{-\delta}/(e\sqrt m)>1/(9\sqrt m)$. The first-order generator obeys
+\[
+ \|S_1\|_{\rm op}\ge\frac{t|v_m|}{\delta\Omega}
+ \ge\frac{t}{3\delta\Omega m^{1/4}}.
+\]
+For the excited paired state $|P_m\rangle$, the two spin channels have equal modulus and denominators of the same sign, giving
+\[
+ \langle P_m|H_{\rm eff}^{(2)}|P_m\rangle
+ =-2t^2\sum_{k\ge0}
+ \frac{|\langle k|D_-(\sqrt X)|m\rangle|^2}{(k+\delta)\Omega}.
+\]
+Keeping the $k=0$ term proves
+\[
+ \|H_{\rm eff}^{(2)}\|_{\rm op}
+ \ge\frac{2\sqrt m}{9\delta}\frac{t^2}{U}
+       \left(1+\frac{\delta}{m}\right).
+\]
+These lower bounds diverge as $m\to\infty$ at fixed $t,U>0$ and fixed $\delta$, with $\Omega=U/(m+\delta)$. They concern the selected excited block and ordinary operator norm, not every thermally weighted local resummation. The polymer argument above avoids inverse gaps by controlling complete connected supports.
+
+The scope is deliberately narrow. There is no theorem here for bond-SSH coupling, imbalanced separately fixed spin sectors, or uniform finite-volume canonical correlations. We do not bound unrestricted Yang-matrix order, prove a ceiling linear in $\Omega$, or claim optimized constants. The result is a mathematical upper bound, not a measured superconducting transition temperature. No material prediction, synthesis, or experimental superconducting transition is claimed.
+
+\section*{Supporting material and disclosure}
+The finite arithmetic replay is \path{replay/replay.py}, a byte-exact copy of the replay that accompanies the proof of Theorem~\ref{thm:main}. Its SHA-256 digest, pinned in \path{replay/SOURCE-PINS.json}, is
+\begin{center}
+\small\texttt{95cea47ff327c5abbfa1b4251bddb9eae7e8bc7c041d312ba7aeae51620027ed}.
+\end{center}
+Its default run and its \path{--all-mutants} run both exit with status zero; the latter rejects each of 27 deliberately corrupted variants. The replay checks finite exact and interval witnesses, including the sixteen-state bond algebra and the sector decompositions behind Lemma~\ref{lem:form}, the square-completion identity, the rational enclosures, and the explicit cluster constants. It does not formalize the oscillator trace identity, the infinite-volume cluster expansion, or the canonical pressure argument. No empirical data or simulation results are used. Independent proof reviews were carried out by separate AI agents. This preprint has not been peer reviewed. AI agents generated proofs, certificates, code, and manuscript drafts and edits under D. Rens' direction and review.
+
+\ifstaged{\LINEARFOURDOI}{\par\noindent Article DOI: \expandafter\DOI\expandafter{\LINEARFOURDOI}}{}
+\ifstaged{\LINEARFOURSUPPDOI}{\par\noindent Supplement DOI: \expandafter\DOI\expandafter{\LINEARFOURSUPPDOI}}{}
+\ifstaged{\LINEARFOURREPO}{\par\noindent{\small Source repository: \expandafter\url\expandafter{\LINEARFOURREPO}\par}}{}
+
+{\raggedright\bibliographystyle{plain}\bibliography{refs}\par}
+\end{document}
